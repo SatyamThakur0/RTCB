@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background: #121212;
+  /* color: #fff; */
+}
+#tasklist::-webkit-scrollbar{
+  display: none;
+}
+#task::-webkit-scrollbar{
+  display: none;
+}
+
+.parent::-webkit-scrollbar{
+  display: none;
+}
+
+
+
+@layer base {}
