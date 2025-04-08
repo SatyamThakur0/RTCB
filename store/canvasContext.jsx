@@ -10,8 +10,8 @@ const CanvasProvider = ({ children }) => {
     useEffect(() => {
         if (typeof window !== "undefined" && canvasRef.current) {
             const fabricCanvas = new fabric.Canvas(canvasRef.current, {
-                width: 4000,
-                height: 3000,
+                width: window.innerWidth,
+                height: window.innerHeight,
                 isDrawingMode: true,
             });
             fabricCanvas.selection = true;

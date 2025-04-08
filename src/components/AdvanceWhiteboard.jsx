@@ -9,6 +9,7 @@ import {
   rotateCanvas,
   clearSelection,
   addId,
+  addPath,
 } from "./FabricEventHandler.jsx";
 import { Button } from "@/components/ui/button";
 import { Trash2 } from "lucide-react";
@@ -136,6 +137,22 @@ export default function AdvancedWhiteboard() {
       canvas.on("object:modified", (e) =>
         modifyCanvasData(e, canvas, socket, roomId)
       );
+      canvas.on("path:created", function (e) {
+        // addId(e.path);
+        let path = e.path;
+        path.set({ id: uid.rnd() });
+        canvas.add(e.path);
+        const center = path.getCenterPoint();
+        // Set origin to center and reposition based on the center
+        path.set({
+          originX: "center",
+          originY: "center",
+          left: center.x,
+          top: center.y,
+        });
+        canvas.renderAll();
+        addPath(e, canvas, socket, roomId, uid.rnd());
+      });
       canvas.on("object:moving", (e) => {
         movedCanvas(e, canvas, socket, roomId);
       });

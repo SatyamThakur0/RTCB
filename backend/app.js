@@ -28,9 +28,9 @@ app.use(
 io.on("connection", (socket) => {
   //   const { roomId } = socket.handshake.query;
   //   socket.join(roomId);
-//   console.log(socket);
-//   console.log(socket.handshake.query);
-  
+  //   console.log(socket);
+  //   console.log(socket.handshake.query);
+
   socket.on("join", (roomID) => {
     console.log(socket.id, " Connected to ", roomID);
     socket.join(roomID);
@@ -46,14 +46,6 @@ io.on("connection", (socket) => {
     console.log(socket.connected);
 
     socket.to(roomId).emit("movedShape", objs);
-    // io.in(roomId)
-    //     .allSockets()
-    //     .then((sockets) => {
-    //         console.log(
-    //             `Broadcasted movedShape to room ${roomId}, members:`,
-    //             Array.from(sockets)
-    //         );
-    //     });
   });
   socket.on("rotated", ({ objs, roomId }) => {
     socket.to(roomId).emit("rotatedShape", objs);
@@ -71,7 +63,9 @@ io.on("connection", (socket) => {
   socket.on("clearSelection", ({ objs, roomId }) => {
     socket.to(roomId).emit("clearedShapes", objs);
   });
-  socket.on("freePath", (path) => {
+  socket.on("freepath", (path) => {
+    console.log(path);
+
     socket.broadcast.emit("receivedFreePath", path);
   });
 });
